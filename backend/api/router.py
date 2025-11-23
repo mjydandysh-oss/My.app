@@ -3,9 +3,9 @@ Main API Router - Combines all endpoints
 """
 
 from fastapi import APIRouter
-from backend.api.endpoints import console, chat, agents
-from backend.agents.parent_controller import parent_controller
-from backend.config.settings import settings
+from api.endpoints import console, chat, agents
+from agents.parent_controller import parent_controller
+from config.settings import settings
 
 router = APIRouter()
 

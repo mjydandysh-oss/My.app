@@ -5,9 +5,9 @@ Stage 1: Initial Scaffold with Agent Orchestration
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.api.router import router
-from backend.config.settings import settings
-from backend.agents.parent_controller import parent_controller, BaseAgent
+from api.router import router
+from config.settings import settings
+from agents.parent_controller import parent_controller, BaseAgent
 
 # Initialize FastAPI app
 app = FastAPI(

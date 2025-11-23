@@ -5,7 +5,7 @@ Agents Endpoint - Agent management and execution
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Dict, Any, List, Optional
-from backend.agents.parent_controller import parent_controller, BaseAgent
+from agents.parent_controller import parent_controller, BaseAgent
 
 router = APIRouter(prefix="/agents", tags=["agents"])
 

@@ -1,3 +1,64 @@
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv
+frontend/venv/
+backend/venv/
+metaos/venv/
+
+# Node modules
+node_modules/
+frontend/node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+frontend/logs/
+
+# Docker volumes
+docker-compose.override.yml
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Vite
+frontend/dist/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Legacy
 .htaccess
 css.php
 rpc/
