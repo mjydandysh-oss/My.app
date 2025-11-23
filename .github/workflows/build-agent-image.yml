@@ -40,5 +40,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -euo pipefail
+          echo "Checking release v1.0.0 exists"
           echo "$GITHUB_TOKEN" | gh auth login --with-token
-          gh release upload v1.0.0 myapp_agent_image_v1.tar.gz --clobber
+          gh release view v1.0.0 --repo mjydandysh-oss/My.app
+          echo "Uploading asset (with retries)"
+          ATTEMPTS=0
+          until [ "$ATTEMPTS" -ge 3 ]
+          do
+            gh release upload v1.0.0 myapp_agent_image_v1.tar.gz --clobber --repo mjydandysh-oss/My.app && break
+            ATTEMPTS=$((ATTEMPTS+1))
+            echo "Upload attempt $ATTEMPTS failed, retrying in 5s..."
+            sleep 5
+          done
+          if [ "$ATTEMPTS" -ge 3 ]; then
+            echo "Failed to upload asset after $ATTEMPTS attempts" >&2
+            exit 1
+          fi
