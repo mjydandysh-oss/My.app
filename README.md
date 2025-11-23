@@ -101,6 +101,77 @@ My.app/
 
 ---
 
+## 🧩 Local Agent Package (`myapp_agent`)
+
+This repository includes a small, installable Python package `myapp_agent` which provides a lightweight local agent server with API-key authentication, a safe command executor (whitelist), logging, and a CLI.
+
+### Install
+
+You can install the agent package directly from the release wheel:
+
+```bash
+pip install https://github.com/mjydandysh-oss/My.app/releases/download/v1.0.0/myapp_agent-0.1.0-py3-none-any.whl
+```
+
+Or install from the repository source:
+
+```bash
+git clone https://github.com/mjydandysh-oss/My.app.git
+cd My.app
+pip install ./releases/myapp_agent-0.1.0-py3-none-any.whl
+```
+
+### Create API key (local)
+
+The release also includes an example key file (do not publish keys publicly):
+
+```
+releases/agent_api_key.txt
+```
+
+To create a local key and save it to your home config file:
+
+```bash
+# Generate and save a key locally (also prints it)
+myapp-agent create-key --out ./my_agent_key.txt
+```
+
+### Run the agent server
+
+Set the key(s) via environment variable or pass via `--keys`.
+
+```bash
+# Using environment variable
+export MYAPP_AGENT_KEYS="$(cat releases/agent_api_key.txt)"
+myapp-agent serve --host 0.0.0.0 --port 9000
+
+# Or pass keys on serve command (comma-separated)
+myapp-agent serve --host 0.0.0.0 --port 9000 --keys "<key1>,<key2>"
+```
+
+### Docker (agent image)
+
+A `Dockerfile.agent` is included to containerize the agent. To build locally:
+
+```bash
+# Build the container locally
+docker build -f Dockerfile.agent -t myapp-agent:0.1.0 .
+
+# Run it (remember to provide keys)
+docker run -e MYAPP_AGENT_KEYS="<your_key>" -p 9000:9000 myapp-agent:0.1.0
+```
+
+We attempted to build and export an image in the dev environment; if you prefer, you can build and push the image to your registry (Docker Hub / GHCR) from your machine or server.
+
+### API usage examples
+
+See `API.md` for full examples of `/v1/chat` and `/v1/execute` endpoints.
+
+---
+
+
+---
+
 ## 🔧 Backend Configuration
 
 ### Settings (`backend/config/settings.py`)
